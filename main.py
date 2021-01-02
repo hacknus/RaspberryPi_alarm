@@ -23,8 +23,7 @@ pixels = neopixel.NeoPixel(
 
 def sunrise():
     for j in range(255):
-        print(j, int(j * 0.8), int(j * 0.8))
-        pixels.fill((j, int(j * 0.8), int(j * 0.8)))
+        pixels.fill((j, j, j))
         pixels.show()
         time.sleep(1)
 
@@ -38,7 +37,7 @@ def get_file():
     r = requests.get(link, allow_redirects=True)
     open('podcasts/echo.mp3', 'wb').write(r.content)
     print("converting FILE")
-    os.system("ffmpeg -i echo.mp3 echo.wav")
+    os.system("ffmpeg -i podcasts/echo.mp3 podcasts/echo.wav")
 
 
 def play_podcast():
@@ -46,6 +45,10 @@ def play_podcast():
 
 
 if __name__ == '__main__':
-    sunrise()
-    get_file()
-    play_podcast()
+    try:
+        sunrise()
+        get_file()
+        play_podcast()
+    except KeyboardInterrupt:
+        pixels.fill((0, 0, 0))
+        pixels.show()
