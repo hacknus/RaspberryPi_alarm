@@ -23,17 +23,21 @@ pixels = neopixel.NeoPixel(
 
 def sunrise():
     for j in range(255):
+        print((j, int(j * 0.8), int(j * 0.8))
         pixels.fill((j, int(j * 0.8), int(j * 0.8)))
         pixels.show()
         time.sleep(1)
 
 
 def get_file():
+    print("getting URL")
     url = "https://www.srf.ch/feed/podcast/sd/28549e81-c453-4671-92ad-cb28796d06a8.xml"
     feed = feedparser.parse(url)
     link = feed["items"][0]["links"][0]["url"]
+    print("getting FILE")
     r = requests.get(link, allow_redirects=True)
     open('podcasts/echo.mp3', 'wb').write(r.content)
+    print("converting FILE")
     os.system("ffmpeg -i echo.mp3 echo.wav")
 
 
@@ -44,3 +48,4 @@ def play_podcast():
 if __name__ == '__main__':
     sunrise()
     get_file()
+    play_podcast()
