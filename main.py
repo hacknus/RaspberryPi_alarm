@@ -23,7 +23,7 @@ pixels = neopixel.NeoPixel(
 
 def sunrise():
     for j in range(255):
-        print((j, int(j * 0.8), int(j * 0.8))
+        print(j, int(j * 0.8), int(j * 0.8))
         pixels.fill((j, int(j * 0.8), int(j * 0.8)))
         pixels.show()
         time.sleep(1)
