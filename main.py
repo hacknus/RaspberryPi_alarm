@@ -2,26 +2,32 @@ import feedparser
 import os
 import requests
 import time
-import board
-import neopixel
+import platform
 
-# Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
-# NeoPixels must be connected to D10, D12, D18 or D21 to work.
-pixel_pin = board.D12
+OS = platform.system()
 
-# The number of NeoPixels
-num_pixels = 24
+if OS != "Darwin":
+    import board
+    import neopixel
 
-# The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
-# For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
-ORDER = neopixel.GRB
+    # Choose an open pin connected to the Data In of the NeoPixel strip, i.e. board.D18
+    # NeoPixels must be connected to D10, D12, D18 or D21 to work.
+    pixel_pin = board.D12
 
-pixels = neopixel.NeoPixel(
-    pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
-)
+    # The number of NeoPixels
+    num_pixels = 24
+
+    # The order of the pixel colors - RGB or GRB. Some NeoPixels have red and green reversed!
+    # For RGBW NeoPixels, simply change the ORDER to RGBW or GRBW.
+    ORDER = neopixel.GRB
+
+    pixels = neopixel.NeoPixel(
+        pixel_pin, num_pixels, brightness=0.2, auto_write=False, pixel_order=ORDER
+    )
 
 
 def sunrise():
+    if OS == "Darwin": return
     for j in range(255):
         pixels.fill((j, j, j))
         pixels.show()
@@ -41,14 +47,22 @@ def get_file():
 
 
 def play_podcast():
+    if OS == "Darwin": return
     os.system("aplay podcasts/echo.wav")
 
 
 if __name__ == '__main__':
     try:
-        sunrise()
-        get_file()
-        play_podcast()
+        t = time.time()
+        while True:
+            t = time.time()
+            if t > 1609654301:
+                sunrise()
+                get_file()
+                play_podcast()
+                exit()
+            time.sleep(60)
     except KeyboardInterrupt:
-        pixels.fill((0, 0, 0))
-        pixels.show()
+        if OS != "Darwin":
+            pixels.fill((0, 0, 0))
+            pixels.show()
