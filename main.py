@@ -11,5 +11,5 @@ def get_file():
 
 
 if __name__ == '__main__':
-
+    get_file()
 
