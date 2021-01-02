@@ -1,16 +1,15 @@
-# This is a sample Python script.
 import feedparser
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+import os
+import requests
+
+def get_file():
+    url = "https://www.srf.ch/feed/podcast/sd/28549e81-c453-4671-92ad-cb28796d06a8.xml"
+    feed = feedparser.parse(url)
+    link = feed["items"][0]["links"][0]["url"]
+    r = requests.get(link, allow_redirects=True)
+    open('podcasts/echo.mp3', 'wb').write(r.content)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
