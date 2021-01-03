@@ -78,7 +78,12 @@ def play_podcast():
 
 if __name__ == '__main__':
     machine = Alarm()
+    print("setting time")
     machine.set_time(7, 10)
+    if OS != "Darwin":
+        print("reset LED")
+        pixels.fill((0, 0, 0))
+        pixels.show()
     try:
         while True:
             if machine.check():
