@@ -3,6 +3,7 @@ import os
 import requests
 import time
 import platform
+import datetime
 
 OS = platform.system()
 
@@ -26,12 +27,36 @@ if OS != "Darwin":
     )
 
 
+class Alarm:
+
+    def __init__(self):
+        self.hour = -1
+        self.minute = -1
+
+    def set_time(self, h, m):
+        self.hour = h
+        self.minute = m
+
+    def check(self):
+        now = datetime.datetime.now()
+        if self.hour == now.hour() and self.minute == now.minute():
+            return True
+        else:
+            return False
+
+
 def sunrise():
     if OS == "Darwin": return
     for j in range(255):
         pixels.fill((j, j, j))
         pixels.show()
         time.sleep(1)
+
+
+def sunset():
+    if OS == "Darwin": return
+    pixels.fill((0, 0, 0))
+    pixels.show()
 
 
 def get_file():
@@ -52,16 +77,16 @@ def play_podcast():
 
 
 if __name__ == '__main__':
+    machine = Alarm()
+    machine.set_time(8, 0)
     try:
-        t = time.time()
         while True:
-            t = time.time()
-            if t > 1609654301:
+            if machine.check():
                 sunrise()
                 get_file()
                 play_podcast()
-                exit()
-            time.sleep(60)
+                sunset()
+            time.sleep(30)
     except KeyboardInterrupt:
         if OS != "Darwin":
             pixels.fill((0, 0, 0))
