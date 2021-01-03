@@ -78,7 +78,7 @@ def play_podcast():
 
 if __name__ == '__main__':
     machine = Alarm()
-    machine.set_time(8, 0)
+    machine.set_time(7, 10)
     try:
         while True:
             if machine.check():
