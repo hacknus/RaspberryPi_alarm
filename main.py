@@ -39,7 +39,7 @@ class Alarm:
 
     def check(self):
         now = datetime.datetime.now()
-        if self.hour == now.hour() and self.minute == now.minute():
+        if self.hour == now.hour and self.minute == now.minute:
             return True
         else:
             return False
