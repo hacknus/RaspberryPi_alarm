@@ -5,7 +5,8 @@ import pyowm
 
 
 def get_weather():
-    api_key = 'a3100ab334b24cf715e5c7acb12445b8'  # your API Key here as string
+    f = open("key.txt", "r")
+    api_key = f.read()  # your API Key here as string
     owm = pyowm.OWM(api_key)  # Use API key to get data
     mgr = owm.weather_manager()
     one_call = mgr.one_call(lat=47.36667, lon=8.55)
