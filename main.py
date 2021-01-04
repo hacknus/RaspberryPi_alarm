@@ -40,6 +40,7 @@ class Alarm:
     def check(self):
         now = datetime.datetime.now()
         if self.hour == now.hour and self.minute == now.minute:
+            print("now")
             return True
         else:
             return False
@@ -79,7 +80,7 @@ def play_podcast():
 if __name__ == '__main__':
     machine = Alarm()
     print("setting time")
-    machine.set_time(7, 10)
+    machine.set_time(7-1, 10)
     if OS != "Darwin":
         print("reset LED")
         pixels.fill((0, 0, 0))
