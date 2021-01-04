@@ -70,6 +70,7 @@ class Machine:
             print(datetime.datetime.now().replace(tzinfo=tz))
             for alarm in self.alarms:
                 if alarm.check() or OS == "Darwin":
+                    print("waking up")
                     self.wake_up()
             time.sleep(30)
 
@@ -77,7 +78,7 @@ class Machine:
 if __name__ == '__main__':
     root = Machine()
     print("setting time")
-    root.init_alarm(23, 36)
+    root.init_alarm(23, 38)
     root.led.turn_off()
     try:
         root.main()
