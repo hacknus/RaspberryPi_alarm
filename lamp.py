@@ -29,6 +29,7 @@ class Lamp:
     def sunrise(self):
         if OS == "Darwin": return
         for j in range(255):
+            print(j)
             self.pixels.fill((j, j, j))
             self.pixels.show()
             time.sleep(1)
@@ -36,6 +37,7 @@ class Lamp:
     def sunset(self):
         if OS == "Darwin": return
         for j in range(255, 0, -1):
+            print(j)
             self.pixels.fill((j, j, j))
             self.pixels.show()
             time.sleep(1)
