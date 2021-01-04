@@ -78,8 +78,8 @@ class Machine:
 if __name__ == '__main__':
     root = Machine()
     print("setting time")
-    root.init_alarm(23, 54)
-    root.led.sunset()
+    root.init_alarm(23, 59)
+    root.led.turn_off()
     try:
         root.main()
     except KeyboardInterrupt:
