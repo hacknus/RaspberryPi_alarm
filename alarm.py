@@ -1,4 +1,7 @@
 import datetime
+import pytz
+
+tz = pytz.timezone('Europe/Zurich')
 
 
 class Alarm:
@@ -14,7 +17,7 @@ class Alarm:
         self.days = d
 
     def check(self):
-        now = datetime.datetime.now()
+        now = datetime.datetime.now().replace(tzinfo=tz)
         if self.hour == now.hour and self.minute == now.minute:
             return True
         else:

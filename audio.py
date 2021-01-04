@@ -10,6 +10,7 @@ class Audio:
         pass
 
     def say(self, text):
+        print(text)
         if OS == "Darwin": return
         os.system('pico2wave -w temp.wav "{}"'.format(text))
         os.system("aplay temp.wav")
