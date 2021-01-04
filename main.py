@@ -78,7 +78,7 @@ class Machine:
 if __name__ == '__main__':
     root = Machine()
     print("setting time")
-    root.init_alarm(23, 46)
+    root.init_alarm(23, 48)
     root.led.turn_off()
     try:
         root.main()
