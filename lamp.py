@@ -32,7 +32,7 @@ class Lamp:
             print(j)
             self.pixels.fill((j, j, j))
             self.pixels.show()
-            time.sleep(1)
+            time.sleep(0.25)
 
     def sunset(self):
         if OS == "Darwin": return
@@ -40,7 +40,7 @@ class Lamp:
             print(j)
             self.pixels.fill((j, j, j))
             self.pixels.show()
-            time.sleep(1)
+            time.sleep(0.05)
 
     def turn_off(self):
         if OS == "Darwin": return
