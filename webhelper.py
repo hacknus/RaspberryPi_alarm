@@ -27,3 +27,11 @@ def get_file():
     print("converting FILE")
     os.system("ffmpeg -i podcasts/echo.mp3 podcasts/echo.wav")
     return link
+
+
+def get_maloney():
+    pass
+
+
+if __name__ == "__main__":
+    get_maloney()
