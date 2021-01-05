@@ -10,10 +10,15 @@ def get_weather():
     owm = OWM(api_key)  # Use API key to get data
     print(owm)
     mgr = owm.weather_manager()
-    one_call = mgr.one_call(lat=47.36667, lon=8.55)
-    temperature = one_call.forecast_daily[0].temperature('celsius').get('day', None)
-    feels_temperature = one_call.forecast_daily[0].temperature('celsius').get('feels_like_day', None)
-    data = one_call.forecast_daily[0].detailed_status
+    # one_call = mgr.one_call(lat=47.36667, lon=8.55)
+    observation = mgr.weather_at_place('Zurich')
+    w = observation.weather
+    temperature = w.temperature('celsius').get('temp', None)
+    feels_temperature = w.temperature('celsius').get('feels_like', None)
+    data = w.detailed_status
+    # temperature = one_call.forecast_daily[0].temperature('celsius').get('day', None)
+    # feels_temperature = one_call.forecast_daily[0].temperature('celsius').get('feels_like_day', None)
+    # data = one_call.forecast_daily[0].detailed_status
     return temperature, feels_temperature, data
 
 
