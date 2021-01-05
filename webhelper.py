@@ -8,8 +8,6 @@ def get_weather():
     f = open("key.txt", "r")
     api_key = f.read().replace("\n", "")  # your API Key here as string
     owm = OWM(api_key)  # Use API key to get data
-    print(owm)
-    print(api_key)
     mgr = owm.weather_manager()
     # one_call = mgr.one_call(lat=47.36667, lon=8.55)
     observation = mgr.weather_at_place('Zurich')
