@@ -13,7 +13,8 @@ class Audio:
         print(text)
         if OS == "Darwin": return
         os.system('pico2wave -w temp.wav "{}"'.format(text))
-        os.system("aplay temp.wav")
+        os.system("ffmpeg -i temp.wav -ac 2 temp2.wav")
+        os.system("aplay temp2.wav")
 
     def play_song(self, filename):
         if OS == "Darwin": return

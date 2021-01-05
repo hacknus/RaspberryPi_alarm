@@ -59,12 +59,12 @@ class Machine:
         month = months[now.month - 1]
         try:
             temp, temp_feels, weather = get_weather()
-            forecast = f"Good morning Linus, It is {t} on the {day}. of {month}. The temperature outside is {temp} " \
-                       f"and feels like {temp_feels} " \
-                       f"degrees centigrade and the weather status is {weather}. " \
+            forecast = f"Good morning Linus, It is {t} on the {day} of {month},,, The temperature outside is {temp} " \
+                       f"degrees and feels like {temp_feels} " \
+                       f"degrees and the weather status is {weather},,, " \
                        "Stand by for the news."
         except:
-            forecast = f"Good morning Linus, It is {t} on the {day}. of {month}. The weather data is unavailable. " \
+            forecast = f"Good morning Linus, It is {t} on the {day}. of {month},,, The weather data is unavailable,,, " \
                        "Stand by for the news."
         self.audio.say(forecast)
         get_file()
