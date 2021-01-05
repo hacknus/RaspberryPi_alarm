@@ -1,7 +1,7 @@
 import feedparser
 import os
 import requests
-from pyowm import OWM
+from pyowm.owm import OWM
 
 
 def get_weather():
