@@ -1,13 +1,13 @@
 import feedparser
 import os
 import requests
-from pyowm.owm import OWM
+import pyowm
 
 
 def get_weather():
     f = open("key.txt", "r")
     api_key = f.read()  # your API Key here as string
-    owm = OWM(api_key)  # Use API key to get data
+    owm = pyowm.OWM(api_key)  # Use API key to get data
     mgr = owm.weather_manager()
     one_call = mgr.one_call(lat=47.36667, lon=8.55)
     temperature = one_call.forecast_daily[0].temperature('celsius').get('day', None)
@@ -26,3 +26,4 @@ def get_file():
     open('podcasts/echo.mp3', 'wb').write(r.content)
     print("converting FILE")
     os.system("ffmpeg -i podcasts/echo.mp3 podcasts/echo.wav")
+    return link
