@@ -23,6 +23,8 @@ def get_weather():
 
 def get_file():
     print("getting URL")
+    os.system("rm podcasts/echo.mp3")
+    os.system("rm podcasts/echo.wav")
     url = "https://www.srf.ch/feed/podcast/sd/28549e81-c453-4671-92ad-cb28796d06a8.xml"
     feed = feedparser.parse(url)
     link = feed["items"][0]["links"][0]["url"]

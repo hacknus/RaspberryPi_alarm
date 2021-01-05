@@ -12,6 +12,8 @@ class Audio:
     def say(self, text):
         print(text)
         if OS == "Darwin": return
+        os.system("rm temp.wav")
+        os.system("rm temp2.wav")
         os.system('pico2wave -w temp.wav "{}"'.format(text))
         os.system("ffmpeg -i temp.wav -ac 2 temp2.wav")
         os.system("aplay temp2.wav")

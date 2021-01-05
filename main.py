@@ -66,8 +66,8 @@ class Machine:
         except:
             forecast = f"Good morning Linus, It is {t} on the {day}. of {month},,, The weather data is unavailable,,, " \
                        "Stand by for the news."
-        self.audio.say(forecast)
         get_file()
+        self.audio.say(forecast)
         self.audio.play_podcast()
         self.led.turn_off()
 
@@ -85,7 +85,7 @@ class Machine:
 if __name__ == '__main__':
     root = Machine()
     print("setting time")
-    root.init_alarm(23, 42)
+    root.init_alarm(8, 0)
     root.led.turn_off()
     try:
         root.main()
