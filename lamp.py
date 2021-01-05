@@ -2,7 +2,6 @@ import time
 import platform
 
 debug = True
-
 OS = platform.system()
 if OS != "Darwin":
     import board

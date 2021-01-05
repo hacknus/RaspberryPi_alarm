@@ -8,6 +8,8 @@ from audio import Audio
 from webhelper import get_file, get_weather
 import platform
 
+from lamp import debug
+
 tz = pytz.timezone('Europe/Zurich')
 OS = platform.system()
 
