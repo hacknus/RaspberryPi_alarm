@@ -1,6 +1,8 @@
 import time
 import platform
 
+debug = True
+
 OS = platform.system()
 if OS != "Darwin":
     import board
@@ -27,7 +29,7 @@ class Lamp:
         )
 
     def sunrise(self):
-        if OS == "Darwin": return
+        if OS == "Darwin" or debug: return
         for j in range(255):
             print(j)
             self.pixels.fill((j, j, j))

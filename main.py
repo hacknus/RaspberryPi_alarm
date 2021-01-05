@@ -69,7 +69,7 @@ class Machine:
             self.load_alarms()
             print(datetime.datetime.now().replace(tzinfo=tz))
             for alarm in self.alarms:
-                if alarm.check() or OS == "Darwin":
+                if alarm.check() or OS == "Darwin" or debug:
                     print("waking up")
                     self.wake_up()
             time.sleep(30)
