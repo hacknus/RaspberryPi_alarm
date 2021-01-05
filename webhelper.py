@@ -6,7 +6,7 @@ from pyowm.owm import OWM
 
 def get_weather():
     f = open("key.txt", "r")
-    api_key = f.read()  # your API Key here as string
+    api_key = f.read().replace("\n", "")  # your API Key here as string
     owm = OWM(api_key)  # Use API key to get data
     print(owm)
     print(api_key)
