@@ -42,10 +42,12 @@ class Machine:
     def load_alarms(self):
         with open('alarms.json', 'r') as f:
             self.alarms_dict = json.load(f)
+        self.alarms = []
         for i in range(len(self.alarms)):
-            self.alarms[i].hour = self.alarms_dict["alarms"][i]["hour"]
-            self.alarms[i].minute = self.alarms_dict["alarms"][i]["minute"]
-            self.alarms[i].days = self.alarms_dict["alarms"][i]["days"]
+            hour = self.alarms_dict["alarms"][i]["hour"]
+            minutes = self.alarms_dict["alarms"][i]["minute"]
+            days = self.alarms_dict["alarms"][i]["days"]
+            self.alarms.append(Alarm(hour, minutes, days))
 
     def wake_up(self):
         self.led.sunrise()
