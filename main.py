@@ -43,7 +43,7 @@ class Machine:
         with open('alarms.json', 'r') as f:
             self.alarms_dict = json.load(f)
         self.alarms = []
-        for i in range(len(self.alarms)):
+        for i in range(len(self.alarms_dict["alarms"])):
             hour = self.alarms_dict["alarms"][i]["hour"]
             minutes = self.alarms_dict["alarms"][i]["minute"]
             days = self.alarms_dict["alarms"][i]["days"]
@@ -78,6 +78,7 @@ class Machine:
             self.load_alarms()
             print(datetime.datetime.now().replace(tzinfo=tz))
             for alarm in self.alarms:
+                print(alarm.hour)
                 if alarm.check() or OS == "Darwin" or debug:
                     print("waking up")
                     self.wake_up()
