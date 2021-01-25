@@ -46,23 +46,23 @@ def get_calendar_message():
                 for ev in evs.keys():
                     s += f'{ev} at {evs[ev].strftime("%H:%M")}, '
                 s = s[:-2]
-                s += "."
+                s += ",,, "
             elif num_evs > 1:
                 s += f"You have one event from {cal.name}."
                 for ev in evs.keys():
                     s += f'{ev} at {evs[ev].strftime("%H:%M")}, '
                 s = s[:-2]
-                s += "."
+                s += ",,, "
         else:
             if len(evs) == 1:
                 for ev in evs.keys():
-                    s += f"Today is the birthday of {ev}. "
+                    s += f"Today is the birthday of {ev},,, "
             elif len(evs) > 1:
                 s += "Today is the birthday of"
                 for ev in evs.keys():
                     s += f" {ev} and "
                 s = s[:-4]
-                s += "."
+                s += ",,, "
     return s
 
 
