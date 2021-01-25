@@ -10,7 +10,7 @@ import platform
 
 from lamp import debug
 
-tz = pytz.timezone('Europe/Zurich')
+tz = pytz.timezone('CET')
 OS = platform.system()
 
 

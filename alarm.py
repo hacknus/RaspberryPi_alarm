@@ -1,7 +1,7 @@
 import datetime
 import pytz
 
-tz = pytz.timezone('Europe/Zurich')
+tz = pytz.timezone('CET')
 
 
 class Alarm:
