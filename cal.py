@@ -1,5 +1,4 @@
 import caldav
-from datetime import datetime
 from datetime import date
 from datetime import timedelta
 import pytz
@@ -7,7 +6,7 @@ import pytz
 tz = pytz.timezone('CET')
 
 
-def init():
+def init_cals():
     f = open("cal_key.txt", "r")
     url = f.readline().replace("\n", "")
     username = f.readline().replace("\n", "")
@@ -36,7 +35,7 @@ def get_events(calendars, key):
 
 
 def get_calendar_message():
-    cals = init()
+    cals = init_cals()
     s = ""
     for cal in cals:
         evs = get_events(cals, cal.name)

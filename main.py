@@ -2,12 +2,13 @@ import pytz
 import datetime
 import time
 import json
+import platform
+
 from lamp import Lamp
 from alarm import Alarm
 from audio import Audio
 from webhelper import get_file, get_weather
-import platform
-
+from cal import get_calendar_message
 from lamp import debug
 
 tz = pytz.timezone('CET')
@@ -61,15 +62,19 @@ class Machine:
         month = months[now.month - 1]
         try:
             temp, temp_feels, weather = get_weather()
-            forecast = f"Good morning Linus, It is {t} on the {day} of {month},,, The temperature outside is {temp} " \
-                       f"degrees and feels like {temp_feels} " \
-                       f"degrees and the weather status is {weather},,, " \
-                       "Stand by for the news."
+            message = f"Good morning Linus, It is {t} on the {day} of {month},,, The temperature outside is {temp} " \
+                      f"degrees and feels like {temp_feels} " \
+                      f"degrees and the weather status is {weather},,, "
         except:
-            forecast = f"Good morning Linus, It is {t} on the {day}. of {month},,, The weather data is unavailable,,, " \
-                       "Stand by for the news."
+            message = f"Good morning Linus, It is {t} on the {day}. of {month},,, The weather data is unavailable,,, "
+        try:
+            cal_message = get_calendar_message()
+            message += cal_message
+        except:
+            message += "I could not get today's events, please have a look on your own."
+        message += "Stand by for the news."
         get_file()
-        self.audio.say(forecast)
+        self.audio.say(message)
         self.audio.play_podcast()
         self.led.turn_off()
 
