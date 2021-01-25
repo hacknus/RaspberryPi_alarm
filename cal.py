@@ -63,6 +63,8 @@ def get_calendar_message():
                     s += f" {ev} and "
                 s = s[:-4]
                 s += ",,, "
+    if s == "":
+        s = "You have no events scheduled for today,,, "
     return s
 
 
