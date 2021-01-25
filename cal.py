@@ -12,7 +12,6 @@ def init():
     url = f.readline().replace("\n", "")
     username = f.readline().replace("\n", "")
     password = f.readline().replace("\n", "")
-    print(url, username, password)
     client = caldav.DAVClient(url=url, username=username, password=password)
     my_principal = client.principal()
     calendars = my_principal.calendars()
@@ -28,15 +27,45 @@ def get_events(calendars, key):
                                 expand=True)
             for ev in evs:
                 name = ev.vobject_instance.vevent.summary.value
-                dt = ev.vobject_instance.vevent.dtstart.value.replace(tzinfo=pytz.timezone("CET"))
+                try:
+                    dt = ev.vobject_instance.vevent.dtstart.value.replace(tzinfo=pytz.timezone("CET"))
+                except TypeError:
+                    dt = ev.vobject_instance.vevent.dtstart.value
                 events[name] = dt
     return events
 
 
-if __name__ == "__main__":
+def get_calendar_message():
     cals = init()
-    print(get_events(cals, "UZH"))
-    print(get_events(cals, "UniBe"))
-    print(get_events(cals, "ARIS"))
-    print(get_events(cals, "Private"))
-    print(get_events(cals, "Birthdays"))
+    s = ""
+    for cal in cals:
+        evs = get_events(cals, cal.name)
+        num_evs = len(evs)
+        if cal.name != "Birthdays":
+            if num_evs == 1:
+                s += f"You have one event from {cal.name}: "
+                for ev in evs.keys():
+                    s += f'{ev} at {evs[ev].strftime("%H:%M")}, '
+                s = s[:-2]
+                s += "."
+            elif num_evs > 1:
+                s += f"You have one event from {cal.name}."
+                for ev in evs.keys():
+                    s += f'{ev} at {evs[ev].strftime("%H:%M")}, '
+                s = s[:-2]
+                s += "."
+        else:
+            if len(evs) == 1:
+                for ev in evs.keys():
+                    s += f"Today is the birthday of {ev}. "
+            elif len(evs) > 1:
+                s += "Today is the birthday of"
+                for ev in evs.keys():
+                    s += f" {ev} and "
+                s = s[:-4]
+                s += "."
+    return s
+
+
+if __name__ == "__main__":
+    print(get_calendar_message())

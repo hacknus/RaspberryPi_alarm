@@ -32,7 +32,7 @@ def get_file():
     r = requests.get(link, allow_redirects=True)
     open('podcasts/echo.mp3', 'wb').write(r.content)
     print("converting FILE")
-    os.system("ffmpeg -i podcasts/echo.mp3 podcasts/echo.wav")
+    os.system("ffmpeg -i podcasts/echo.mp3 -ac 2 podcasts/echo.wav")
     return link
 
 
