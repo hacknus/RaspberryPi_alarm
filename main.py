@@ -70,7 +70,8 @@ class Machine:
         try:
             cal_message = get_calendar_message()
             message += cal_message
-        except:
+        except Exception as e:
+            print(e)
             message += "I could not get today's events, please have a look on your own."
         message += "Stand by for the news."
         get_file()

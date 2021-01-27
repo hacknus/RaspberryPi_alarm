@@ -31,6 +31,7 @@ def get_events(calendars, key):
                 except TypeError:
                     dt = ev.vobject_instance.vevent.dtstart.value
                 events[name] = dt
+                print(dt)
     return events
 
 
@@ -44,13 +45,17 @@ def get_calendar_message():
             if num_evs == 1:
                 s += f"You have one event from {cal.name}: "
                 for ev in evs.keys():
-                    s += f'{ev} at {evs[ev].strftime("%H:%M")}, '
+                    hour = int(evs[ev].strftime("%H")) + int(evs[ev].strftime("%z").replace("+","")[:2])
+                    minute = int(evs[ev].strftime("%M"))
+                    s += f'{ev} at {hour}:{minute:02}, '
                 s = s[:-2]
                 s += ",,, "
             elif num_evs > 1:
-                s += f"You have one event from {cal.name}."
+                s += f"You have {num_evs} events from {cal.name}: "
                 for ev in evs.keys():
-                    s += f'{ev} at {evs[ev].strftime("%H:%M")}, '
+                    hour = int(evs[ev].strftime("%H")) + int(evs[ev].strftime("%z").replace("+", "")[:2])
+                    minute = int(evs[ev].strftime("%M"))
+                    s += f'{ev} at {hour}:{minute:02}, '
                 s = s[:-2]
                 s += ",,, "
         else:
