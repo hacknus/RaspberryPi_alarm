@@ -22,7 +22,7 @@ def get_events(calendars, key):
     for c in calendars:
         if c.name == key:
             evs = c.date_search(start=date.today(),
-                                end=date.today() + timedelta(days=1),
+                                end=date.today() + timedelta(hours=23, minutes=59),
                                 expand=True)
             for ev in evs:
                 name = ev.vobject_instance.vevent.summary.value
@@ -61,7 +61,7 @@ def get_calendar_message():
         else:
             if len(evs) == 1:
                 for ev in evs.keys():
-                    s += f"Today is the birthday of {ev},,, "
+                    s += f"Today is the birthday of {ev.replace('birthday','')},,, "
             elif len(evs) > 1:
                 s += "Today is the birthday of"
                 for ev in evs.keys():
