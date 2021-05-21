@@ -22,8 +22,7 @@ def get_events(calendars, key):
     for c in calendars:
         if c.name == key:
             evs = c.date_search(start=date.today(),
-                                end=date.today() + timedelta(hours=23, minutes=59),
-                                expand=True)
+                                end=date.today() + timedelta(days=1) - timedelta(minutes=1))
             for ev in evs:
                 name = ev.vobject_instance.vevent.summary.value
                 try:
