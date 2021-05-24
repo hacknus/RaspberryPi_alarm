@@ -20,7 +20,7 @@ class Alarm:
         now = datetime.datetime.now().replace(tzinfo=tz)
         print(now.hour, now.minute)
         print(self.hour, self.minute)
-        if self.hour == now.hour and self.minute == now.minute and now.day in self.days:
+        if self.hour == now.hour and self.minute == now.minute and datetime.datetime.today().weekday() in self.days:
             return True
         else:
             return False
